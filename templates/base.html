@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>{% block head_title%}MuyPicky.com{% endblock head_title %}</title>
+    {% include 'snippets/css.html' %}
 </head>
+
 <body>
-    <h1>Hello World</h1>
-    <p>This is {{ html_var }} comming through</p>
-    
+{% include "snippets/nav.html" %}
 
-    {% if bool_item%}
+    <div class='container'>
 
-    <p>This is {{ num }} comming through</p>
-    {% endif %}
-<p>
-    {% for some_item in some_list %}
-    {% if some_item|divisibleby:"2" %}
-            Even number 
-    {% endif %}
-            {{ some_item }} </br>
+        {% block content%}{% endblock content %}
 
-    {% endfor %}
+    </div>
 
-</p>
+
+
 </body>
 </html>

@@ -9,7 +9,9 @@
 <ul>
     {% for obj in object_list %}
             
-        <li>{{ obj.name }} {{ obj.category }} {{ obj.location }} {{ obj.name }} {{ obj.timestamp }} {{ obj.updated }} </li>
+        <li>
+            <a href='/restaurants/{{ obj.slug }}'>{{ obj }}</a> <br/>
+            {{ obj.name }} {{ obj.category }} {{ obj.location }} {{ obj.name }} {{ obj.timestamp }} {{ obj.updated }} </li>
 
     {% endfor %}
 

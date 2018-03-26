@@ -6,30 +6,32 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 import random
 from django.views import View
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView,CreateView
 
-from .forms import RestaurantCreateForm
+from .forms import RestaurantCreateForm, RestaurantLocationCreateForm
 from .models import RestaurantLocation
 
 
 
 
-def restaurant_createview(request):
-    template_name = 'restaurants/form.html'
-    context = {}
-    print(request.POST)
 
-    if request.method == 'POST':
-        print("post data")
-        title = request.POST.get("title")
-        location = request.POST.get("location")
-        category = request.POST.get("category")
-        obj = RestaurantLocation.objects.create(
-            name=title,
-            category = category,
-            location = location
-        )
+
+
+
+
+def restaurant_createview(request):
+    form = RestaurantLocationCreateForm(request.POST or None)
+    errors = None
+    if form.is_valid():
+        form.save()
         return HttpResponseRedirect('/restaurants/')
+    if form.errors:
+        errors = form.errors
+
+        
+    template_name = 'restaurants/form.html'
+    context = {"form": form, "errors": errors}
+
     return render(request, template_name, context)
 
 
@@ -50,7 +52,7 @@ def restaurant_detailtview(request, slug):
 
     obj = RestaurantLocation.objects.get(slug=slug)
     context = {
-        "object":obj
+        "object":obj,
     }
     return render(request, template_name,context)
 
@@ -93,3 +95,8 @@ class RestaurantDetailView(DetailView):
         obj = get_object_or_404(RestaurantLocation, id=rest_id)
         return obj
 """
+
+class RestaurantCrateView(CreateView):
+    form_class = RestaurantLocationCreateForm
+    template_name = 'restaurants/form.html'
+    success_url = '/restaurants/'

@@ -14,8 +14,9 @@ def validate_email(value):
        raise ValidationError("We do not accept edu emails")
 
 
-CATEGORIES = ['Mexican', 'Asian', 'American', 'Whatever']
+CATEGORIES = ['Mexican', 'Asian', 'American', 'Whatever','Italian','Tacos1']
 
 def validate_category(value):
-    if not value in CATEGORIES:
+    cat = value.capitalize()
+    if not value in CATEGORIES and not cat in CATEGORIES:
         raise ValidationError(f'This {value} is not a valid category')

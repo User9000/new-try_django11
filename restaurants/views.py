@@ -3,12 +3,35 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 import random
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
 
+from .forms import RestaurantCreateForm
 from .models import RestaurantLocation
+
+
+
+
+def restaurant_createview(request):
+    template_name = 'restaurants/form.html'
+    context = {}
+    print(request.POST)
+
+    if request.method == 'POST':
+        print("post data")
+        title = request.POST.get("title")
+        location = request.POST.get("location")
+        category = request.POST.get("category")
+        obj = RestaurantLocation.objects.create(
+            name=title,
+            category = category,
+            location = location
+        )
+        return HttpResponseRedirect('/restaurants/')
+    return render(request, template_name, context)
+
 
 # Create your views here.
 
@@ -21,6 +44,18 @@ def restaurant_listview(request):
     }
     return render(request, template_name,context)
 
+
+def restaurant_detailtview(request, slug):
+    template_name = 'restaurants/restaurants_detail.html'
+
+    obj = RestaurantLocation.objects.get(slug=slug)
+    context = {
+        "object":obj
+    }
+    return render(request, template_name,context)
+
+
+### Filter by Restaurant Category
 class RestaurantListView(ListView):
     
     template_name = 'restaurants/restaurants_list.html'
@@ -37,6 +72,8 @@ class RestaurantListView(ListView):
         else:
             queryset = RestaurantLocation.objects.all()
         return queryset
+    
+    
     def get_context_data(self, *args, **kwargs):
         print(self.kwargs)
         context = super(RestaurantListView,self).get_context_data(*args, **kwargs)

@@ -27,11 +27,11 @@ def rl_pre_save_receiver(sender, instance, *args, **kwargs):
         instance.slug = unique_slug_generator(instance)
         
 
-def rl_post_save_receiver(sender, instance, *args, **kwargs):
+"""def rl_post_save_receiver(sender, instance, *args, **kwargs):
     print('saved..')
     print(instance.timestamp)
-
+"""
 #Signals
 pre_save.connect(rl_pre_save_receiver, sender=RestaurantLocation)
-post_save.connect(rl_post_save_receiver, sender=RestaurantLocation)
+#post_save.connect(rl_post_save_receiver, sender=RestaurantLocation)
 

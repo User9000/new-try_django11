@@ -10,8 +10,8 @@
     {% for obj in object_list %}
             
         <li>
-            <a href='{% url "restaurant-detail" slug=obj.slug %}'>{{ obj }}</a> <br/>
-            <a href='/restaurants/{{ obj.slug }}'>{{ obj }}</a> <br/>
+            <a href='{{ obj.get_absolute_url }}'>{{ obj }}</a> <br/>
+           
             {{ obj.name }} {{ obj.category }} {{ obj.location }} {{ obj.name }} {{ obj.timestamp }} {{ obj.updated }} 
         
         </li>

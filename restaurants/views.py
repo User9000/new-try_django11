@@ -12,49 +12,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
-@login_required()
-def restaurant_createview(request):
-    form = RestaurantLocationCreateForm(request.POST or None)
-    errors = None
-    if form.is_valid():
-        if request.user.is_authenticated():
-            
-            instance = form.save(commit=False)
-            instance.owner = request.user
-            instance.save()
-            #form.save()
-            return HttpResponseRedirect('/restaurants/')
-        else:
-            return HttpResponseRedirect("/login/")
-    if form.errors:
-        errors = form.errors
-
-        
-    template_name = 'restaurants/form.html'
-    context = {"form": form, "errors": errors}
-
-    return render(request, template_name, context)
-
-
-# Create your views here.
-def restaurant_listview(request):
-    template_name = 'restaurants/restaurants_list.html'
-
-    queryset = RestaurantLocation.objects.all()
-    context = {
-        "object_list":queryset
-    }
-    return render(request, template_name,context)
-
-
-def restaurant_detailtview(request, slug):
-    template_name = 'restaurants/restaurants_detail.html'
-
-    obj = RestaurantLocation.objects.get(slug=slug)
-    context = {
-        "object":obj,
-    }
-    return render(request, template_name,context)
 
 
 ### Filter by Restaurant Category

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from restaurants.views import restaurant_listview, RestaurantCreateView,RestaurantListView, RestaurantDetailView
+from restaurants.views import RestaurantCreateView,RestaurantListView, RestaurantDetailView
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 

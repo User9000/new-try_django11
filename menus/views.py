@@ -38,11 +38,12 @@ class ItemCreateView(LoginRequiredMixin,CreateView):
     def get_form_kwargs(self):
         kwargs = super(ItemCreateView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
+        #kwargs['instance'] = Item.objects.filter(user = self.request.user).first()
         return kwargs
 
 
 
-class ItemUpdateView(UpdateView):
+class ItemUpdateView(LoginRequiredMixin,UpdateView):
     template_name = 'form.html'
     form_class = ItemForm
 
@@ -55,6 +56,17 @@ class ItemUpdateView(UpdateView):
         context['title']='Update Item'
         return context
 
+     #Override get_context_data function#
+    def get_context_data(self, *args, **kwargs):
+        context = super(ItemUpdateView,self).get_context_data(*args, **kwargs)
+        context['title']='Update Menu Item'
+        return context
+    #Override get_form_kwargs function#
+    def get_form_kwargs(self):
+        kwargs = super(ItemUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        #kwargs['instance'] = Item.objects.filter(user = self.request.user).first()
+        return kwargs
 
 
 

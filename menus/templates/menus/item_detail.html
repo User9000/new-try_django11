@@ -1,0 +1,28 @@
+
+
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <h1> {{ object.name }}</h1>
+    <h2> {{ object.restaurant.name }}</h2>
+    <p> Location: {{ object.restaurant.location }}</p>
+
+
+        {% for item in object.get_contents %}
+                <li>{{ item }}</li>
+                {% endfor %}
+ 
+             {% if object.excludes %}
+             Contents
+             <ul>
+             {% for item in object.get_excludes %}
+                        <li>{{ item }}</li>
+                        {% endfor %}
+             </ul>
+             {% endif %}
+
+
+
+{% endblock %}

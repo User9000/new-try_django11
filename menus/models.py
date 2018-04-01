@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 # Create your models here.
 from restaurants.models import RestaurantLocation
+from django.core.urlresolvers import reverse
 
 class Item(models.Model):
     #associations
@@ -15,9 +16,13 @@ class Item(models.Model):
     public       = models.BooleanField(default=True)
     timestamp    = models.DateTimeField(auto_now_add=True)
     updated      = models.DateTimeField(auto_now=True)
+    
+    
+    def get_absolute_url(self):
+        return reverse('menus:detail', kwargs={'pk':self.pk})
+
 
     class Meta:
-
         ordering =['-updated', '-timestamp']
 
     def get_contents(self):

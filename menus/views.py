@@ -51,15 +51,13 @@ class ItemUpdateView(LoginRequiredMixin,UpdateView):
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(ItemCreateView,self).get_context_data(*args, **kwargs)
-        context['title']='Update Item'
-        return context
+
 
      #Override get_context_data function#
     def get_context_data(self, *args, **kwargs):
         context = super(ItemUpdateView,self).get_context_data(*args, **kwargs)
-        context['title']='Update Menu Item'
+        name = self.get_object().name
+        context['title']=f'Update Item: {name}'
         return context
     #Override get_form_kwargs function#
     def get_form_kwargs(self):

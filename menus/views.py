@@ -19,7 +19,7 @@ class ItemDetailView(DetailView):
         return Item.objects.filter(user=self.request.user)
 
 class ItemCreateView(LoginRequiredMixin,CreateView):
-    template_name = 'form.html'
+    template_name = 'menus/detail-update.html'
     form_class = ItemForm
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
@@ -44,7 +44,7 @@ class ItemCreateView(LoginRequiredMixin,CreateView):
 
 
 class ItemUpdateView(LoginRequiredMixin,UpdateView):
-    template_name = 'form.html'
+    template_name = 'menus/detail-update.html'
     form_class = ItemForm
 
 

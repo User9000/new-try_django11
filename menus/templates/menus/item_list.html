@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <h1> Item list</h1>
+    <h1> Menu Items <small><a href='{% url "menus:create" %}'>Add</a></small></h1> 
 
     {% for obj in object_list %}
              <li><a href='{{ obj.get_absolute_url }}'>{{ obj.name }}</a></li>

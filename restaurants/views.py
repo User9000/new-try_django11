@@ -11,9 +11,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
-
-
 ### Filter by Restaurant Category
 class RestaurantListView(LoginRequiredMixin,ListView):
     template_name = 'restaurants/restaurants_list.html'

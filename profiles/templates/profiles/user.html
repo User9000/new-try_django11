@@ -8,11 +8,11 @@
     <h1> {{ user.username }}</h1>
     <hr/>
 
-   
+{% if user.item_set.all.exists %}
 
     {% for rest in user.restaurantlocation_set.all %}
-
-        <li>{{ rest.title }}
+        
+        <li><b>{{ rest.title }}</b> | {{ rest.location }}  | {{ rest.category }}
             <ul>
                 
                 {% for item in rest.item_set.all %}
@@ -30,8 +30,11 @@
     {% endfor %}
 
 
+{% else %}
+         <p class='lead'>No Items Found</p>
 
 
+         {% endif %}
 
 
 

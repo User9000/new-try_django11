@@ -12,19 +12,26 @@
 
     {% for rest in user.restaurantlocation_set.all %}
         
-        <li><b>{{ rest.title }}</b> | {{ rest.location }}  | {{ rest.category }}
+        <div class='row'>
+            <div class='col-sm-12'>
+                <div class='thumbnail'>
+                <h4>{{ rest.title }}</h4> 
+                <p>{{ rest.location }}  | {{ rest.category }}</p>
             <ul>
                 
                 {% for item in rest.item_set.all %}
-                           <li>{{ item.name }} </li> <br>
+                           <li syle='margin-bottom: 15px;'>{{ item.name }} </li> <br>
                            {% for ing in item.get_contents %}
-                                <span style='margin-right:4px;background-color:#ccc'>{{ ing }}</span>
+                                <span class='badge badge-default'>{{ ing }}</span>
                            {% endfor %}
                 {% endfor %}
             
             
             </ul>
-        </li>
+        </div>
+    </div>
+    
+        </div>
     
 
     {% endfor %}
@@ -34,7 +41,7 @@
          <p class='lead'>No Items Found</p>
 
 
-         {% endif %}
+{% endif %}
 
 
 

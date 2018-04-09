@@ -28,9 +28,11 @@
                 
                  {% for item in rest.item_set.all %} 
                            <li syle='margin-bottom: 15px;'>{{ item.name }} </li> <br>
+                           
                            {% for ing in item.get_contents %}
-                                <span class='badge badge-default'>{{ ing }}</span>
+                                <a href='{{ requer.path }}?q={{ ing }}'><span class='badge badge-default'>{{ ing }}</span></a>
                            {% endfor %}
+
                {% endfor %} 
             
             

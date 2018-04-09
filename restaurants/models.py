@@ -12,8 +12,10 @@ User = settings.AUTH_USER_MODEL
 
 class RestaurantLocationQuerySet(models.query.QuerySet):
     def search(self,query):
+
         if query:
-                return self.filter(
+            query.strip()
+            return self.filter(
             Q(name__icontains=query)     | 
             Q(location__icontains=query) |
             Q(category__icontains=query) |

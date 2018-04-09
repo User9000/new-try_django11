@@ -23,12 +23,12 @@
             <div class='col-sm-12'>
                 <div class='thumbnail'>
                 <h4>{{ rest.title }}</h4> 
-                <p>{{ rest.location }}  | {{ rest.category }}</p>
+                <p> <a href='{{ requer.path }}?q={{ rest.location }}' >{{ rest.location }}  </a>| <a a href='{{ requer.path }}?q={{ rest.category }}'>{{ rest.category }}</a></p>
             <ul>
                 
                  {% for item in rest.item_set.all %} 
                            <li syle='margin-bottom: 15px;'>{{ item.name }} </li> <br>
-                           
+
                            {% for ing in item.get_contents %}
                                 <a href='{{ requer.path }}?q={{ ing }}'><span class='badge badge-default'>{{ ing }}</span></a>
                            {% endfor %}

@@ -22,7 +22,10 @@ class Profile(models.Model):
 def post_save_user_receiver(sender,instance,created, *args, **kwargs):
         if created:
             profile, is_created = Profile.objects.get_or_create(user=instance)
-        
+            default_user_profile = Profile.objects.get(user__id=1)
+            default_user_profile.followers.add(instance)
+            profile.followers.add(default_user_profile.user)
 
+#signal post event
 post_save.connect(post_save_user_receiver, sender=User)
     

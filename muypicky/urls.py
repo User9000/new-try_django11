@@ -19,6 +19,8 @@ from restaurants.views import RestaurantCreateView,RestaurantListView, Restauran
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
+from profiles.views import ProfileFollowToggle
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,6 +28,7 @@ urlpatterns = [
     url(r'^restaurants/',include('restaurants.urls',namespace='restaurants') ),
     url(r'^u/',include('profiles.urls',namespace='profiles') ),
     url(r'^menus/',include('menus.urls',namespace='menus') ),
+    url(r'^profile-follow/$', ProfileFollowToggle.as_view(), name='follow'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^password_reset/$', PasswordResetView.as_view(), name= 'password_reset'),
     url(r'^password_reset/done/$', PasswordResetView.as_view(), name= 'password_reset_done'),

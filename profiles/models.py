@@ -7,6 +7,9 @@ User = settings.AUTH_USER_MODEL
 # Create your models here.
 
 
+
+
+
 class Profile(models.Model):
                          
     user        = models.OneToOneField(User)

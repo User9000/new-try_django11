@@ -15,14 +15,8 @@ User = get_user_model()
 
 class ProfileFollowToggle(LoginRequiredMixin,View):
     def post(self, request, *args, **kwargs):
-        user_to_toggle = request.POST.get("username")
-        username_ = user_to_toggle.strip()      
-        profile_ = Profile.objects.get(user__username__iexact=username_)
-        user = request.user
-        if user in profile_.followers.all():
-            profile_.followers.remove(user)
-        else:
-            profile_.followers.add(user)
+        username_to_toggle = request.POST.get("username")
+        profile_, is_following = Profile.objects.toggle_follow(request.user,username_to_toggle)ßßß 
         return redirect(f"/u/{profile_.user.username}/")
 
 
@@ -51,5 +45,5 @@ class ProfileDetailView(DetailView):
                 
         if items_exists and qs.exists():
             context['locations'] = qs
-        print(context['is_following'])              
+                
         return context

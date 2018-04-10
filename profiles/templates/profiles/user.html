@@ -1,29 +1,18 @@
-
-
 {% extends "base.html" %}
-
-
 {% block content %}
-
 <h1> {{ user.username }}</h1>
-{% if user.profile in request.user.is_follwing.all %}
-    IS FOLLOWING 
-{% endif %}
+
 <p>{% include 'profiles/snippet/follow_form.html' with username=user.username is_following=is_following %}</p>
 
 <form class='form' method='GET' action='.'>
-
     <input type='text' placeholder='Search' name='q' value='{{ request.GET.q }}'>
     <button class='btn btn-default' type='submit'> Search</button>
-
-
 </form>
-    <hr/>
+
+<hr/>
 
 {% if locations %}
-
-    {% for rest in locations %}
-        
+    {% for rest in locations %}       
         <div class='row'>
             <div class='col-sm-12'>
                 <div class='thumbnail'>
@@ -37,27 +26,17 @@
                            {% for ing in item.get_contents %}
                                 <a href='{{ requer.path }}?q={{ ing }}'><span class='badge badge-default'>{{ ing }}</span></a>
                            {% endfor %}
-
                {% endfor %} 
-            
-            
+                       
             </ul>
         </div>
     </div>
-    
-        </div>
-    
+   
+        </div>   
 
     {% endfor %}
 
-
 {% else %}
          <p class='lead'>No Items Found</p>
-
-
 {% endif %}
-
-
-
-
 {% endblock %}

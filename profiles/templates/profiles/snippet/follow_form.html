@@ -6,9 +6,9 @@
     <input type='hidden' name='username' value='{% if username %}{{ username }}{% else %}admin{% endif %}'/>
 
       {% if is_following %}
-        <button>UnFollow</button>
+        <button class='btn btn-default'>UnFollow</button>
      {% else %}
-        <button>Follow</button>
+        <button class='btn btn-primary'>Follow</button>
     {% endif %}
 
     </form>

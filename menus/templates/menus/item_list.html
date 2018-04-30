@@ -8,12 +8,15 @@
     <h1> Menu Items <small><a href='{% url "menus:create" %}'>Add</a></small></h1> 
 
     {% for obj in object_list %}
-             <li><a href='{{ obj.get_absolute_url }}'>{{ obj.name }}</a></li>
+    <div class='row'>
+            <div class='col-sm-12'>
+                    <div class='thumbnail'>
+             <li style='margin-bottom: 15px;'><a href='{{ obj.get_absolute_url }}'>{{ obj.name }}</a></li>
              {% if obj.contents %}
-             Contents
+             <h4>Contents</h4>
              <ul>
                     {% for item in obj.get_contents %}
-                        <li>{{ item }}</li>
+                        <li class='badge badge-default'>{{ item }}</li>
                         {% endfor %}
              </ul>
              {% endif %}
@@ -25,7 +28,9 @@
                         {% endfor %}
              </ul>
              {% endif %}
-
+            </div>
+            </div>
+        </div>
 
     {% endfor %}
 

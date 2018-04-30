@@ -7,18 +7,23 @@
 <h1> Restaurant List<small><a href='{% url "restaurants:create" %}'> Add </a></small></h1>
 
 <ul>
+        <div class='row'>
+                <div class='col-sm-12'>
+                        <div class='thumbnail'>
     {% for obj in object_list %}
             
-        <li>
+        <li style='margin-bottom: 15px;'>
             <a href='{{ obj.get_absolute_url }}'>{{ obj }}</a> <br/>
            
             {{ obj.name }} {{ obj.category }} {{ obj.location }} {{ obj.name }} {{ obj.timestamp }} {{ obj.updated }} 
         
         </li>
         {% empty %}
-            <li><a href='{% url "restaurants:create "%}'> Add One</a></li>
+            <li><a href='{% url "restaurants:create"%}'> Add One</a></li>
     {% endfor %}
-
+    </div>
+    </div>
+</div>
 </ul>
 
 {% endblock %}

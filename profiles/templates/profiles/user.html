@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
 <h1> {{ user.username }}</h1>
 
 <p>{% include 'profiles/snippet/follow_form.html' with username=user.username is_following=is_following %}</p>
@@ -21,7 +22,7 @@
             <ul>
                 
                  {% for item in rest.item_set.all %} 
-                           <li syle='margin-bottom: 15px;'>{{ item.name }} </li> <br>
+                           <li style='margin-bottom: 15px;'>{{ item.name }} </li> <br>
 
                            {% for ing in item.get_contents %}
                                 <a href='{{ requer.path }}?q={{ ing }}'><span class='badge badge-default'>{{ ing }}</span></a>

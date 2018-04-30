@@ -24,7 +24,6 @@ class ProfileDetailView(DetailView):
     queryset = User.objects.filter(is_active=True)
     template_name = 'profiles/user.html'
 
-
     def get_object(self):
         username = self.kwargs.get("username")
         if username is None:

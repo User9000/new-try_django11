@@ -19,12 +19,13 @@ from restaurants.views import RestaurantCreateView,RestaurantListView, Restauran
 from django.views.generic import TemplateView
 from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 
+from menus.views import HomeView
 from profiles.views import ProfileFollowToggle
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',TemplateView.as_view(template_name='home.html'),name ='home'),
+    url(r'^$',HomeView.as_view(),name ='home'),
     url(r'^restaurants/',include('restaurants.urls',namespace='restaurants') ),
     url(r'^u/',include('profiles.urls',namespace='profiles') ),
     url(r'^menus/',include('menus.urls',namespace='menus') ),

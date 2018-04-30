@@ -16,7 +16,7 @@ User = get_user_model()
 class ProfileFollowToggle(LoginRequiredMixin,View):
     def post(self, request, *args, **kwargs):
         username_to_toggle = request.POST.get("username")
-        profile_, is_following = Profile.objects.toggle_follow(request.user,username_to_toggle)ßßß 
+        profile_, is_following = Profile.objects.toggle_follow(request.user,username_to_toggle)
         return redirect(f"/u/{profile_.user.username}/")
 
 

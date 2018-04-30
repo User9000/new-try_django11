@@ -23,16 +23,13 @@ class ProfileManager(models.Manager):
 
 
 
-class Profile(models.Model):
-                         
+class Profile(models.Model):                  
     user        = models.OneToOneField(User)
     followers   = models.ManyToManyField(User, related_name='is_following',blank=True)
-    
     activated   = models.BooleanField(default=False)
     timestamp   = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
-
-    objects = ProfileManager()
+    objects     = ProfileManager()
 
     def __str__(self):
         return self.user.username

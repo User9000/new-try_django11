@@ -13,13 +13,13 @@
     <div class='row'>
         <div class='col-sm-12'>
             <div class='thumbnail'>
-            <h3>{{ obj.user }}</h3> 
+            <h3><a href='{% url "profiles:detail" username=obj.user.username %}'>{{ obj.user }}</a></h3> 
             <h4>{{ obj.name }}</h4> 
-            <p> <a href='{{ obj.restaurant.title}}' >{{ obj.restaurant.location }}  </a>| {{ obj.restaurant.category }}</a></p>
+            <p> <a href='{% url "profiles:detail" username=obj.user.username %}?q={{ obj.restaurant.title }}' >{{ obj.restaurant.title }}  </a>| <a href='{% url "profiles:detail" username=obj.user.username %}?q={{ obj.restaurant.category }}'>{{ obj.restaurant.category }}</a></p>
         <ul>
             
              {% for item in obj.restaurant.item_set.all %} 
-                       <li syle='margin-bottom: 15px;'>{{ item.name }} </li> <br>
+                       <li style='margin-bottom: 15px;'>{{ item.name }} </li> <br>
 
                        {% for ing in item.get_contents %}
                             <a href='{{ requer.path }}?q={{ ing }}'><span class='badge badge-default'>{{ ing }}</span></a>

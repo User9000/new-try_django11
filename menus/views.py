@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView
-
-
 from .forms import ItemForm
 from .models import Item
 from django.contrib.auth.mixins import LoginRequiredMixin

@@ -5,15 +5,16 @@
 
 {% block content %}
 
+
     <h1> Menu Items <small><a href='{% url "menus:create" %}'>Add</a></small></h1> 
 
     {% for obj in object_list %}
     <div class='row'>
-            <div class='col-sm-12'>
-                    <div class='thumbnail'>
-             <li style='margin-bottom: 15px;'><a href='{{ obj.get_absolute_url }}'>{{ obj.name }}</a></li>
+        <div class='col-sm-6 text-center col-sm-offset-3'>
+            <div class='thumbnail'>
+             <b style='margin-bottom: 15px;'><a href='{{ obj.get_absolute_url }}'>{{ obj.name }}</a></b>
              {% if obj.contents %}
-             <h4>Contents</h4>
+             <h5>Contents</h5>
              <ul>
                     {% for item in obj.get_contents %}
                         <li class='badge badge-default'>{{ item }}</li>

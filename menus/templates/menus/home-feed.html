@@ -1,17 +1,12 @@
 
 
 {% extends "base.html" %}
-
-
 {% block content %}
-
-
-
+<h1>User Following Feed</h1>
     {% for obj in object_list %}{% csrf_token %}
 
-  
     <div class='row'>
-        <div class='col-sm-12'>
+        <div class='col-sm-6 text-center col-sm-offset-3'>
             <div class='thumbnail'>
             <h3><a href='{% url "profiles:detail" username=obj.user.username %}'>{{ obj.user }}</a></h3> 
             <h4>{{ obj.name }}</h4> 
@@ -19,11 +14,12 @@
         <ul>
             
              {% for item in obj.restaurant.item_set.all %} 
-                       <li style='margin-bottom: 15px;'>{{ item.name }} </li> <br>
+                     <b style='margin-bottom: 15px;'>{{ item.name }}</b> with
 
                        {% for ing in item.get_contents %}
-                            <a href='{{ requer.path }}?q={{ ing }}'><span class='badge badge-default'>{{ ing }}</span></a>
+                            <a href='{% url "profiles:detail" username=obj.user.username  %}?q={{ ing }}'><span class='badge badge-default'>{{ ing }}</span></a>
                        {% endfor %}
+        </br>
            {% endfor %} 
                    
         </ul>

@@ -17,10 +17,10 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from restaurants.views import RestaurantCreateView,RestaurantListView, RestaurantDetailView
 from django.views.generic import TemplateView
-from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import LoginView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView, LogoutView
 
 from menus.views import HomeView
-from profiles.views import ProfileFollowToggle
+from profiles.views import ProfileFollowToggle, RegisterView
 
 
 urlpatterns = [
@@ -31,6 +31,8 @@ urlpatterns = [
     url(r'^menus/',include('menus.urls',namespace='menus') ),
     url(r'^profile-follow/$', ProfileFollowToggle.as_view(), name='follow'),
     url(r'^login/$', LoginView.as_view(), name='login'),
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
+    url(r'^register/$', RegisterView.as_view(), name='register'),
     url(r'^password_reset/$', PasswordResetView.as_view(), name= 'password_reset'),
     url(r'^password_reset/done/$', PasswordResetView.as_view(), name= 'password_reset_done'),
     url(r'^about/', TemplateView.as_view(template_name='about.html'), name='about'),

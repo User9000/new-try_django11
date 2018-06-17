@@ -16,8 +16,10 @@ class RegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'email',)
+
     def clean_email(self):
         email = self.cleaned_data.get("email")
+
         qs = User.objects.filter(email__iexact = email)
         if qs.exists():
            raise forms.ValidationError("Cannot use this email")
@@ -41,6 +43,8 @@ class RegistrationForm(forms.ModelForm):
 
         if commit:
             user.save()
-            user.profile.send_activation_email()
+            #print('save')
+            #print(user.profile)
+            #user.profile.send_activation_email()
         return user
 

@@ -123,5 +123,27 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+
+### DJANGO EMAIL Configuration ###
+
+EMAIL_HOST ='smtp.sendgrid.net'
+EMAIL_HOST_USER ='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'
+EMAIL_HOST_PASSWORD = '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'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+DEFAULT_FROM_EMAIL = 'Carlo Lam <calam12@gmail.com>'
+
+ADMINS = (
+
+    ('Carlo', 'calam12@gmail.com')
+
+)
+
+MANAGERS =  ADMINS
+
+############################
+
 STATIC_URL = '/static/'
 LOGOUT_REDIRECT_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'

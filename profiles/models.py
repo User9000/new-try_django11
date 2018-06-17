@@ -2,9 +2,10 @@ from django.db import models
 from django.conf import settings
 from django.db.models.signals import post_save
 
-
+from .utils import code_generator
 User = settings.AUTH_USER_MODEL
 # Create your models here.
+from django.core.mail import send_mail
 
 
 class ProfileManager(models.Manager):
@@ -23,20 +24,36 @@ class ProfileManager(models.Manager):
 
 
 
-class Profile(models.Model):                  
-    user        = models.OneToOneField(User)
-    followers   = models.ManyToManyField(User, related_name='is_following',blank=True)
-    activated   = models.BooleanField(default=False)
-    timestamp   = models.DateTimeField(auto_now_add=True)
-    updated     = models.DateTimeField(auto_now=True)
-    objects     = ProfileManager()
+class Profile(models.Model):
+
+    user            =   models.OneToOneField(User)
+    followers       =   models.ManyToManyField(User, related_name='is_following',blank=True)
+    activated       =   models.BooleanField(default=False)
+    activation_key  =   models.CharField(max_length=120, blank=True, null = True)
+    timestamp       =   models.DateTimeField(auto_now_add=True)
+    updated         =   models.DateTimeField(auto_now=True)
+    objects         =   ProfileManager()
 
     def __str__(self):
         return self.user.username
 
     def send_activation_email(self):
-        print("Activation Email")
-        pass
+
+        if not self.activated:
+            self.activation_key = code_generator()
+            self.save()
+            subject = 'Activation for MuyPicky.com'
+            from_email = settings.DEFAULT_FROM_EMAIL
+            message = f'Activation Your Accoun:{self.activation_key}'
+            recipient_list = [self.user.email]
+            html_message =  f'Activation Your Accoun:{self.activation_key}'
+        
+            sent_mail = send_mail(subject, message, from_email, recipient_list, fail_silently=False, html_message=html_message)
+            #print(send_mail)
+            
+           
+        return sent_mail
+
 
 def post_save_user_receiver(sender,instance,created, *args, **kwargs):
         if created:
